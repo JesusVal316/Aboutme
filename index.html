@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jesús Valdés | Full Stack & Game Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<style>
+:root{
+  --accent:#67e8f9;
+  --dark:#05070f;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  color:white;
+  background:var(--dark);
+  overflow-x:hidden;
+}
+
+/* 🌌 SPACE CANVAS */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* CONTAINER */
+.container{width:92%;max-width:1180px;margin:auto}
+
+/* NAV */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  backdrop-filter:blur(20px);
+  background:rgba(5,7,15,.6);
+  z-index:1000;
+  border-bottom:1px solid rgba(103,232,249,.12);
+}
+
+.navbar{
+  height:75px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-weight:700;
+  background:linear-gradient(90deg,#67e8f9,#a5b4fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.nav-links{display:flex;gap:1rem}
+.nav-links a{color:white;text-decoration:none;font-size:.9rem}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding-top:90px;
+}
+
+.hero-wrapper{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:3rem;
+}
+
+.hero h1{
+  font-size:3.4rem;
+  background:linear-gradient(90deg,#fff,#a5b4fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  margin-top:1rem;
+  color:#a3b8d0;
+}
+
+/* 3D */
+model-viewer{
+  width:420px;
+  height:420px;
+  border-radius:20px;
+  background:radial-gradient(circle,#67e8f920,transparent);
+}
+
+/* SECTIONS */
+section{padding:120px 0}
+
+.section-title{text-align:center;margin-bottom:3rem}
+.section-title p{color:var(--accent);letter-spacing:3px}
+.section-title h2{font-size:2.4rem}
+
+/* SKILLS CAROUSEL */
+.carousel{
+  overflow:hidden;
+  margin-top:2rem;
+}
+
+.track{
+  display:flex;
+  gap:1.5rem;
+  animation:scroll 18s linear infinite;
+  width:max-content;
+}
+
+.skill{
+  min-width:140px;
+  padding:1.5rem;
+  background:rgba(255,255,255,.03);
+  border-radius:18px;
+  text-align:center;
+  border:1px solid rgba(103,232,249,.15);
+}
+
+.skill img{
+  width:45px;
+  height:45px;
+  margin-bottom:10px;
+}
+
+@keyframes scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+.carousel:hover .track{
+  animation-play-state:paused;
+}
+
+/* GRID */
+.grid,.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+}
+
+.card,.project{
+  background:rgba(255,255,255,.03);
+  padding:2rem;
+  border-radius:18px;
+  border:1px solid rgba(103,232,249,.15);
+}
+
+/* GITHUB */
+.github-box{text-align:center}
+.github-box a{
+  background:white;
+  color:black;
+  padding:15px 25px;
+  border-radius:12px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* WHATSAPP */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:65px;
+  height:65px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.whatsapp-float svg{
+  width:32px;
+  height:32px;
+  fill:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-wrapper{flex-direction:column;text-align:center}
+  model-viewer{width:300px;height:300px}
+  .hero h1{font-size:2.4rem}
+  .nav-links{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌌 PARTICLES BACKGROUND -->
+<canvas id="space"></canvas>
+
+<!-- NAV -->
+<header>
+  <div class="container navbar">
+    <div class="logo">Jesús Valdés</div>
+    <nav class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#portfolio">Proyectos</a>
+      <a href="#events">Eventos</a>
+      <a href="#github">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-wrapper">
+
+    <div>
+      <h1>Full Stack & Game Developer</h1>
+      <p>
+        Estudiante de 6° semestre en LMD (UANL).<br>
+        Unity, APIs, backend, apps y videojuegos 2D/3D.
+      </p>
+    </div>
+
+    <model-viewer
+      src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+      auto-rotate
+      camera-controls
+      shadow-intensity="1"
+      exposure="0.9">
+    </model-viewer>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-title">
+      <p>HABILIDADES</p>
+      <h2>Tecnologías</h2>
+    </div>
+
+    <div class="carousel">
+      <div class="track">
+
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg">Unity 2D/3D</div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg">C#</div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">JavaScript</div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">Python</div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">SQL</div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg">Swift</div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">Git</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-title">
+      <p>PROYECTOS</p>
+      <h2>Destacados</h2>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="project">🎮 Juegos 2D y 3D en Unity</div>
+      <div class="project">⚙️ APIs REST + Backend</div>
+      <div class="project">📱 Apps con Swift</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="container">
+    <div class="section-title">
+      <p>EXPERIENCIA</p>
+      <h2>Eventos</h2>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="project">🎮 Game Jam TEC</div>
+      <div class="project">🚀 NASA Space Apps UDEM</div>
+      <div class="project">🏫 Hackathons universitarios</div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB -->
+<section id="github">
+  <div class="container">
+    <div class="section-title">
+      <p>CODIGO</p>
+      <h2>GitHub</h2>
+    </div>
+
+    <div class="github-box">
+      <a href="https://github.com/" target="_blank">Ver GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP -->
+<a class="whatsapp-float" href="https://wa.me/528123456789" target="_blank">
+  <svg viewBox="0 0 32 32">
+    <path d="M16 .3C7.3.3.3 7.3.3 16c0 3.1.8 6 2.3 8.6L0 32l7.6-2.5C10 30.8 13 31.7 16 31.7c8.7 0 15.7-7 15.7-15.7S24.7.3 16 .3z"/>
+  </svg>
+</a>
+
+<!-- 🌌 PARTICLES SCRIPT -->
+<script>
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<120;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    d:Math.random()*1
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  update();
+}
+
+function update(){
+  particles.forEach(p=>{
+    p.y += p.d;
+    if(p.y > canvas.height){
+      p.y = 0;
+      p.x = Math.random()*canvas.width;
+    }
+  });
+}
+
+setInterval(draw,33);
+</script>
+
+</body>
+</html>
