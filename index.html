@@ -23,16 +23,19 @@ body{
   overflow-x:hidden;
 }
 
-/* 🌌 PARTICLES */
+/* PARTICLES */
 canvas{
   position:fixed;
-  top:0;
-  left:0;
+  inset:0;
   z-index:-1;
 }
 
 /* CONTAINER */
-.container{width:92%;max-width:1180px;margin:auto}
+.container{
+  width:92%;
+  max-width:1180px;
+  margin:auto;
+}
 
 /* NAV */
 header{
@@ -59,11 +62,9 @@ header{
   -webkit-text-fill-color:transparent;
 }
 
-/* MENU */
 .nav-links{
   display:flex;
   gap:1.2rem;
-  transition:.4s ease;
 }
 
 .nav-links a{
@@ -78,7 +79,23 @@ header{
   cursor:pointer;
 }
 
-/* CLOSE BUTTON (SOLO MOBILE) */
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s ease;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* MOBILE MENU */
 .menu-close{
   display:none;
   position:absolute;
@@ -88,16 +105,50 @@ header{
   cursor:pointer;
 }
 
-/* OVERLAY */
-.overlay{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.6);
-  z-index:999;
+@media(max-width:900px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-links{
+    position:fixed;
+    top:0;
+    right:0;
+    height:100vh;
+    width:75%;
+    background:rgba(5,7,15,.98);
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2rem;
+
+    transform:translateX(100%);
+    transition:.35s ease;
+    z-index:1000;
+  }
+
+  .nav-links.active{
+    transform:translateX(0);
+  }
+
+  .menu-close{
+    display:block;
+  }
+
+  .hero-wrapper{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  model-viewer{
+    width:300px;
+    height:300px;
+  }
+
+  .hero h1{
+    font-size:2.4rem;
+  }
 }
 
 /* HERO */
@@ -136,7 +187,9 @@ model-viewer{
 }
 
 /* SECTIONS */
-section{padding:120px 0}
+section{
+  padding:120px 0;
+}
 
 .section-title{
   text-align:center;
@@ -152,41 +205,32 @@ section{padding:120px 0}
   font-size:2.4rem;
 }
 
-/* ===== CARRUSEL INFINITO ===== */
-.carousel{
-  overflow:hidden;
-  width:100%;
-}
-
-.track{
-  display:flex;
-  width:max-content;
+/* SKILLS */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
   gap:1.5rem;
-  animation:scroll 18s linear infinite;
+  margin-top:2rem;
 }
 
 .skill{
-  min-width:140px;
   padding:1.5rem;
   background:rgba(255,255,255,.03);
   border-radius:18px;
   text-align:center;
   border:1px solid rgba(103,232,249,.15);
+  transition:.3s;
+}
+
+.skill:hover{
+  transform:translateY(-8px);
+  background:rgba(103,232,249,.08);
 }
 
 .skill img{
   width:45px;
   height:45px;
   margin-bottom:10px;
-}
-
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
-
-.carousel:hover .track{
-  animation-play-state:paused;
 }
 
 /* GRID */
@@ -222,41 +266,6 @@ section{padding:120px 0}
   width:32px;
   height:32px;
   fill:white;
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-
-  .menu-toggle{display:block;}
-
-  .nav-links{
-    position:fixed;
-    top:0;
-    right:-100%;
-    width:70%;
-    height:100vh;
-    background:rgba(5,7,15,.98);
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:2rem;
-  }
-
-  .nav-links.active{right:0;}
-
-  .menu-close{display:block;}
-
-  .hero-wrapper{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  model-viewer{
-    width:300px;
-    height:300px;
-  }
-
-  .hero h1{font-size:2.4rem}
 }
 </style>
 </head>
@@ -311,24 +320,17 @@ section{padding:120px 0}
       <h2>Tecnologías</h2>
     </div>
 
-    <div class="carousel">
-      <div class="track">
+    <div class="skills-grid">
 
-        <!-- ORIGINAL -->
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg">Unity</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg">C#</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">JS</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">Python</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">SQL</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg">Swift</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">Git</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg">Unity</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg">C#</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">JavaScript</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">Python</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">SQL</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg">Swift</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">Git</div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg">C++</div>
 
-        <!-- DUPLICADO (IMPORTANTE PARA LOOP) -->
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg">Unity</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg">C#</div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">JS</div>
-
-      </div>
     </div>
   </div>
 </section>
@@ -343,10 +345,10 @@ section{padding:120px 0}
 
     <div class="portfolio-grid">
 
-      <div class="project">🎮 Unity 3D - Juego completo con físicas y gameplay</div>
-      <div class="project">🎮 Unity 2D - Juego móvil con UI y niveles</div>
-      <div class="project">⚙️ API REST - Backend con SQL y autenticación</div>
-      <div class="project">📱 Swift App - Aplicación iOS moderna</div>
+      <div class="project">🎮 Unity 3D - Juego completo con físicas</div>
+      <div class="project">🎮 Unity 2D - Juego móvil con UI</div>
+      <div class="project">⚙️ API REST - Backend con SQL</div>
+      <div class="project">📱 Swift App - App iOS moderna</div>
 
     </div>
   </div>
@@ -363,18 +365,18 @@ section{padding:120px 0}
     <div class="portfolio-grid">
 
       <div class="project">
-        🎮 <b>Game Jam TEC</b><br>
-        Desarrollo de videojuego en 48h bajo presión en equipo.
+        🎮 Game Jam TEC<br>
+        Videojuego en 48h bajo presión en equipo.
       </div>
 
       <div class="project">
-        🚀 <b>NASA Space Apps</b><br>
-        Soluciones con datos reales de la NASA en hackathon global.
+        🚀 NASA Space Apps<br>
+        Soluciones con datos reales de la NASA.
       </div>
 
       <div class="project">
-        🏫 <b>Hackathons UANL</b><br>
-        Creación de software y APIs en eventos universitarios.
+        🏫 Hackathons UANL<br>
+        Desarrollo de software y APIs en equipo.
       </div>
 
     </div>
@@ -390,7 +392,8 @@ section{padding:120px 0}
     </div>
 
     <div style="text-align:center">
-      <a href="https://github.com/JesusVal316" style="background:white;color:black;padding:15px 25px;border-radius:12px;text-decoration:none;font-weight:600;">
+      <a href="https://github.com/JesusVal316"
+         style="background:white;color:black;padding:15px 25px;border-radius:12px;text-decoration:none;font-weight:600;">
         Ver GitHub
       </a>
     </div>
@@ -407,43 +410,43 @@ section{padding:120px 0}
 <script>
 function openMenu(){
   document.getElementById("menu").classList.add("active");
-  document.getElementById("overlay").style.display="block";
+  document.getElementById("overlay").classList.add("active");
 }
 
 function closeMenu(){
   document.getElementById("menu").classList.remove("active");
-  document.getElementById("overlay").style.display="none";
+  document.getElementById("overlay").classList.remove("active");
 }
 
 /* PARTICLES */
-const c=document.getElementById("space");
-const x=c.getContext("2d");
-c.width=innerWidth;
-c.height=innerHeight;
+const canvas=document.getElementById("space");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
-let s=[];
+let stars=[];
 for(let i=0;i<120;i++){
-  s.push({
-    x:Math.random()*c.width,
-    y:Math.random()*c.height,
+  stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
     r:Math.random()*2,
     d:Math.random()
   });
 }
 
 function animate(){
-  x.clearRect(0,0,c.width,c.height);
-  x.fillStyle="white";
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
 
-  s.forEach(o=>{
-    x.beginPath();
-    x.arc(o.x,o.y,o.r,0,Math.PI*2);
-    x.fill();
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
 
-    o.y += o.d;
-    if(o.y>c.height){
-      o.y=0;
-      o.x=Math.random()*c.width;
+    s.y += s.d;
+    if(s.y>canvas.height){
+      s.y=0;
+      s.x=Math.random()*canvas.width;
     }
   });
 
