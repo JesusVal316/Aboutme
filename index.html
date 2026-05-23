@@ -12,6 +12,7 @@
 :root{
   --accent:#67e8f9;
   --dark:#05070f;
+  --card:#0f1322;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -24,248 +25,151 @@ body{
 }
 
 /* PARTICLES */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-}
+canvas{position:fixed; inset:0; z-index:-1;}
 
 /* CONTAINER */
-.container{
-  width:92%;
-  max-width:1180px;
-  margin:auto;
-}
+.container{width:92%; max-width:1180px; margin:auto;}
 
 /* NAV */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
+  position:fixed; top:0; width:100%;
   backdrop-filter:blur(20px);
   background:rgba(5,7,15,.75);
   z-index:1000;
   border-bottom:1px solid rgba(103,232,249,.12);
 }
 
-.navbar{
-  height:75px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+.navbar{height:75px; display:flex; justify-content:space-between; align-items:center;}
 
 .logo{
-  font-weight:700;
+  font-weight:700; font-size:1.45rem;
   background:linear-gradient(90deg,#67e8f9,#a5b4fc);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.nav-links{
-  display:flex;
-  gap:1.2rem;
-}
+.nav-links{display:flex; gap:1.4rem;}
+.nav-links a{color:white; text-decoration:none; font-weight:500;}
 
-.nav-links a{
-  color:white;
-  text-decoration:none;
-}
+.menu-toggle{display:none; font-size:2.1rem; cursor:pointer; color:var(--accent);}
 
-/* HAMBURGER */
-.menu-toggle{
-  display:none;
-  font-size:2rem;
-  cursor:pointer;
-}
-
-/* OVERLAY */
 .overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s ease;
-  z-index:999;
+  position:fixed; inset:0; background:rgba(0,0,0,.75);
+  opacity:0; pointer-events:none; transition:.3s; z-index:999;
 }
+.overlay.active{opacity:1; pointer-events:auto;}
 
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* MOBILE MENU */
 .menu-close{
-  display:none;
-  position:absolute;
-  top:20px;
-  right:20px;
-  font-size:2rem;
-  cursor:pointer;
+  display:none; position:absolute; top:25px; right:25px;
+  font-size:2.3rem; cursor:pointer; color:var(--accent);
 }
 
 @media(max-width:900px){
-
-  .menu-toggle{
-    display:block;
-  }
-
+  .menu-toggle{display:block;}
   .nav-links{
-    position:fixed;
-    top:0;
-    right:0;
-    height:100vh;
-    width:75%;
-    background:rgba(5,7,15,.98);
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:2rem;
-
-    transform:translateX(100%);
-    transition:.35s ease;
-    z-index:1000;
+    position:fixed; top:0; right:0; height:100vh; width:80%;
+    background:rgba(5,7,15,.98); flex-direction:column;
+    align-items:center; justify-content:center; gap:2.5rem;
+    transform:translateX(100%); transition:.4s ease; z-index:1000;
   }
-
-  .nav-links.active{
-    transform:translateX(0);
-  }
-
-  .menu-close{
-    display:block;
-  }
-
-  .hero-wrapper{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  model-viewer{
-    width:300px;
-    height:300px;
-  }
-
-  .hero h1{
-    font-size:2.4rem;
-  }
+  .nav-links.active{transform:translateX(0);}
+  .menu-close{display:block;}
 }
 
 /* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  padding-top:90px;
-}
+.hero{min-height:100vh; display:flex; align-items:center; padding-top:90px;}
 
 .hero-wrapper{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:3rem;
+  display:flex; justify-content:space-between; align-items:center; gap:4rem;
 }
 
 .hero h1{
-  font-size:3.3rem;
+  font-size:3.5rem; line-height:1.1;
   background:linear-gradient(90deg,#fff,#a5b4fc);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.hero p{
-  margin-top:1rem;
-  color:#a3b8d0;
-}
+.hero p{margin-top:1.2rem; color:#a3b8d0; font-size:1.15rem;}
 
-/* 3D */
 model-viewer{
-  width:420px;
-  height:420px;
-  border-radius:20px;
-  background:radial-gradient(circle,#67e8f920,transparent);
+  width:440px; height:440px; border-radius:28px;
+  background:radial-gradient(circle,#67e8f925,transparent);
+  box-shadow:0 0 70px rgba(103,232,249,.25);
 }
 
 /* SECTIONS */
-section{
-  padding:120px 0;
+section{padding:110px 0;}
+
+.section-title{text-align:center; margin-bottom:3.5rem;}
+.section-title p{color:var(--accent); letter-spacing:4px; font-weight:600;}
+.section-title h2{font-size:2.6rem; margin-top:8px;}
+
+/* PROJECT CARDS */
+.portfolio-grid, .skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(340px,1fr));
+  gap:2rem;
 }
 
-.section-title{
-  text-align:center;
-  margin-bottom:3rem;
+.project{
+  background:var(--card);
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(103,232,249,.15);
+  transition:.4s;
 }
 
-.section-title p{
-  color:var(--accent);
-  letter-spacing:3px;
+.project:hover{
+  transform:translateY(-15px);
+  box-shadow:0 30px 60px rgba(103,232,249,.18);
 }
 
-.section-title h2{
-  font-size:2.4rem;
+.project-img{
+  width:100%; height:230px; object-fit:cover;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.project-info{padding:1.8rem;}
+
+.project-info h3{margin-bottom:12px; font-size:1.35rem;}
+
+.project-info p{
+  color:#a3b8d0; line-height:1.75; font-size:0.98rem;
+}
+
+.project-buttons{
+  margin-top:1.6rem; display:flex; gap:12px;
+}
+
+.project-buttons a{
+  flex:1; padding:13px; border-radius:12px;
+  text-align:center; text-decoration:none; font-weight:600;
 }
 
 /* SKILLS */
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:1.5rem;
-  margin-top:2rem;
-}
-
 .skill{
-  padding:1.5rem;
+  padding:1.8rem 1rem;
   background:rgba(255,255,255,.03);
-  border-radius:18px;
+  border-radius:20px;
   text-align:center;
   border:1px solid rgba(103,232,249,.15);
   transition:.3s;
 }
 
 .skill:hover{
-  transform:translateY(-8px);
+  transform:translateY(-10px);
   background:rgba(103,232,249,.08);
 }
 
-.skill img{
-  width:45px;
-  height:45px;
-  margin-bottom:10px;
-}
-
-/* GRID */
-.grid,.portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2rem;
-}
-
-.card,.project{
-  background:rgba(255,255,255,.03);
-  padding:2rem;
-  border-radius:18px;
-  border:1px solid rgba(103,232f9,.15);
-}
+.skill img{width:50px; height:50px; margin-bottom:12px;}
 
 /* WHATSAPP */
 .whatsapp-float{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:65px;
-  height:65px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-.whatsapp-float svg{
-  width:32px;
-  height:32px;
-  fill:white;
+  position:fixed; bottom:25px; right:25px;
+  width:68px; height:68px; background:#25D366;
+  border-radius:50%; display:flex; align-items:center;
+  justify-content:center; z-index:9999; box-shadow:0 5px 20px rgba(37,211,102,.4);
 }
 </style>
 </head>
@@ -276,19 +180,17 @@ section{
 
 <header>
   <div class="container navbar">
-
     <div class="logo">Jesús Valdés</div>
-
     <div class="menu-toggle" onclick="openMenu()">☰</div>
-
     <nav class="nav-links" id="menu">
       <div class="menu-close" onclick="closeMenu()">✕</div>
+      
+      <a href="#published" onclick="closeMenu()">Publicaciones</a>
+      
+      <a href="#events" onclick="closeMenu()">Experiencia</a>
       <a href="#skills" onclick="closeMenu()">Skills</a>
-      <a href="#projects" onclick="closeMenu()">Proyectos</a>
-      <a href="#events" onclick="closeMenu()">Eventos</a>
       <a href="#github" onclick="closeMenu()">GitHub</a>
     </nav>
-
   </div>
 </header>
 
@@ -297,21 +199,96 @@ section{
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-wrapper">
-
     <div>
       <h1>Full Stack & Game Developer</h1>
-      <p>UANL LMD • Unity • APIs • Backend • 2D / 3D Games</p>
+      <p>UANL LMD • Unity • Backend • 2D/3D Games • Desarrollo Multiplataforma</p>
     </div>
-
     <model-viewer
       src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
       auto-rotate
-      camera-controls>
+      rotation-per-second="22deg"
+      camera-orbit="0deg 75deg 7.5m"
+      interaction-prompt="none"
+      disable-zoom
+      style="pointer-events:none;">
     </model-viewer>
-
   </div>
 </section>
 
+
+
+<!-- PUBLICACIONES -->
+<section id="published">
+  <div class="container">
+    <div class="section-title">
+      <p>PUBLICACIONES</p>
+      <h2>Juegos y Sitios Web</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="project">
+        <img src="Tiny_Kitchen_3.png" class="project-img" alt="Tiny Kitchen">
+        <div class="project-info">
+          <h3> Tiny Kitchen</h3>
+          <p>Videojuego de cocina publicado en Google Play Store. Desarrollado completamente en Unity.</p>
+          <div class="project-buttons">
+            <a href="https://play.google.com/apps/testing/com.jesusvaldes.tinykitchen" target="_blank" style="background:#67e8f9; color:black;">Ver en Play Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <img src="begin 1 (1).png" class="project-img" alt="Last Frame Web">
+        <div class="project-info">
+          <h3> Last Frame - Sitio Web</h3>
+          <p>Página web oficial del juego con galería, noticias y acceso al proyecto.</p>
+          <div class="project-buttons">
+            <a href="https://lastframeweb.vercel.app/" target="_blank" style="background:#a5b4fc; color:black;">Visitar Sitio Web</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+
+
+<!-- EVENTS / EXPERIENCIA -->
+<section id="events">
+  <div class="container">
+    <div class="section-title">
+      <p>EXPERIENCIA</p>
+      <h2>Eventos y Participaciones</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="project">
+        <div class="project-info">
+          
+          <img src="Gamejam.jpeg" class="project-img">
+          <br>
+          <h3> Game Jam TEC</h3>
+          <p>Desarrollo de un juego en equipo bajo presión de tiempo. Enfoque en colaboración y entrega rápida.</p>
+        </div>
+      </div>
+      <div class="project">
+        <div class="project-info">
+          <img src="Space.png" class="project-img">
+          <br>
+          <h3> NASA Space Apps Challenge</h3>
+          <p>Participación en hackathon internacional creando soluciones basadas en datos de la NASA.</p>
+        </div>
+      </div>
+      <div class="project">
+        <div class="project-info">
+          <img src="expo.jpeg" class="project-img">
+          <br>
+          <h3> Expo LMAD · UANL</h3>
+          <p>Exposición de proyectos académicos en la Universidad Autónoma de Nuevo León.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
@@ -319,92 +296,39 @@ section{
       <p>HABILIDADES</p>
       <h2>Tecnologías</h2>
     </div>
-
     <div class="skills-grid">
-
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg">Unity</div>
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg">C#</div>
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">JavaScript</div>
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">Python</div>
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">SQL</div>
-      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg">Swift</div>
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">Git</div>
       <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg">C++</div>
-
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg">Node.js</div>
     </div>
   </div>
 </section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <div class="section-title">
-      <p>PROYECTOS</p>
-      <h2>Destacados</h2>
-    </div>
-
-    <div class="portfolio-grid">
-
-      <div class="project">🎮 Unity 3D - Juego completo con físicas</div>
-      <div class="project">🎮 Unity 2D - Juego móvil con UI</div>
-      <div class="project">⚙️ API REST - Backend con SQL</div>
-      <div class="project">📱 Swift App - App iOS moderna</div>
-
-    </div>
-  </div>
-</section>
-
-<!-- EVENTS -->
-<section id="events">
-  <div class="container">
-    <div class="section-title">
-      <p>EXPERIENCIA</p>
-      <h2>Eventos</h2>
-    </div>
-
-    <div class="portfolio-grid">
-
-      <div class="project">
-        🎮 Game Jam TEC<br>
-        Videojuego en 48h bajo presión en equipo.
-      </div>
-
-      <div class="project">
-        🚀 NASA Space Apps<br>
-        Soluciones con datos reales de la NASA.
-      </div>
-
-      <div class="project">
-        🏫 Hackathons UANL<br>
-        Desarrollo de software y APIs en equipo.
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- GITHUB -->
 <section id="github">
   <div class="container">
     <div class="section-title">
-      <p>CÓDIGO</p>
+      <p>CÓDIGO ABIERTO</p>
       <h2>GitHub</h2>
     </div>
-
-    <div style="text-align:center">
-      <a href="https://github.com/JesusVal316"
-         style="background:white;color:black;padding:15px 25px;border-radius:12px;text-decoration:none;font-weight:600;">
-        Ver GitHub
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="https://github.com/JesusVal316" target="_blank"
+         style="background:white; color:black; padding:16px 32px; border-radius:14px; text-decoration:none; font-weight:700; font-size:1.1rem;">
+        Ver Mi GitHub
       </a>
     </div>
   </div>
 </section>
 
 <!-- WHATSAPP -->
-<a class="whatsapp-float" href="https://wa.me/528112173900">
-<svg viewBox="0 0 32 32">
-<path d="M16 .3C7.3.3.3 7.3.3 16c0 3.1.8 6 2.3 8.6L0 32l7.6-2.5C10 30.8 13 31.7 16 31.7c8.7 0 15.7-7 15.7-15.7S24.7.3 16 .3z"/>
-</svg>
+<a class="whatsapp-float" href="https://wa.me/528112173900" target="_blank">
+  <svg viewBox="0 0 32 32" width="32" height="32" fill="white">
+    <path d="M16 .3C7.3.3.3 7.3.3 16c0 3.1.8 6 2.3 8.6L0 32l7.6-2.5C10 30.8 13 31.7 16 31.7c8.7 0 15.7-7 15.7-15.7S24.7.3 16 .3z"/>
+  </svg>
 </a>
 
 <script>
@@ -412,47 +336,48 @@ function openMenu(){
   document.getElementById("menu").classList.add("active");
   document.getElementById("overlay").classList.add("active");
 }
-
 function closeMenu(){
   document.getElementById("menu").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
 }
 
 /* PARTICLES */
-const canvas=document.getElementById("space");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-let stars=[];
-for(let i=0;i<120;i++){
+let stars = [];
+for(let i = 0; i < 180; i++){
   stars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2,
-    d:Math.random()
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2.3,
+    d: Math.random() + 0.4
   });
 }
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="white";
-
-  stars.forEach(s=>{
+  ctx.fillStyle = "rgba(255,255,255,0.95)";
+  stars.forEach(s => {
     ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
     ctx.fill();
-
     s.y += s.d;
-    if(s.y>canvas.height){
-      s.y=0;
-      s.x=Math.random()*canvas.width;
+    if(s.y > canvas.height){
+      s.y = 0;
+      s.x = Math.random() * canvas.width;
     }
   });
-
   requestAnimationFrame(animate);
 }
 animate();
+
+window.addEventListener('resize', () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+});
 </script>
 
 </body>
